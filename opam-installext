@@ -1,0 +1,6 @@
+#!/bin/bash -x
+
+depext=`opam install $* -e ubuntu`
+echo Ubuntu depexts: $depext
+apt-get install -qq -y build-essential m4 $depext
+opam install $*
