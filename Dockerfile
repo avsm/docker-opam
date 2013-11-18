@@ -1,3 +1,4 @@
+FROM ubuntu:latest
 MAINTAINER Anil Madhavapeddy <anil@recoil.org>
 RUN apt-get -y install sudo pkg-config git build-essential m4 software-properties-common
 RUN git config --global user.email "docker@example.com"
