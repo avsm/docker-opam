@@ -11,6 +11,7 @@ ADD opam-installext /usr/bin/opam-installext
 RUN adduser --disabled-password --gecos "" opam
 RUN passwd -l opam
 ADD opamsudo /etc/sudoers.d/opam
+RUN chmod 440 /etc/sudoers.d/opam
 USER opam
 ENV HOME /home/opam
 ENV OPAMVERBOSE 1
