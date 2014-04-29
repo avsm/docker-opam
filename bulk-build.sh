@@ -10,7 +10,7 @@ pkg=`opam list -s -a`
 mkdir -p $RUN/raw $RUN/err $RUN/ok
 
 for p in $pkg; do
-  sudo docker.io run avsm/opam $p > $RUN/raw/$p 2>&1
+  sudo docker.io run avsm/opam opam installext $p > $RUN/raw/$p 2>&1
   if [ $? != 0 ]; then
     ln -s ../raw/$p $RUN/err/$p
     git add $RUN/err/$p
