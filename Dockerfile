@@ -15,4 +15,3 @@ ENV OPAMVERBOSE 1
 ENV OPAMYES 1
 RUN opam init
 RUN opam install ocamlfind
-ENTRYPOINT ["usr/bin/opam-installext"]
