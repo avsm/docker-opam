@@ -13,5 +13,7 @@ USER opam
 ENV HOME /home/opam
 ENV OPAMVERBOSE 1
 ENV OPAMYES 1
+ENV OPAMDATE 20140511
 RUN opam init
+RUN opam switch 4.02.0dev+trunk
 RUN opam install ocamlfind
