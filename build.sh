@@ -18,4 +18,4 @@ ubuntu,4.02.*)
   ;;
 esac
 
-sudo docker.io build -t opam:$distro-$version .
+sudo docker.io build --no-cache=true -t opam:$distro-$version .
