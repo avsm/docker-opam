@@ -10,7 +10,7 @@ case $distro,$version in
 ubuntu,4.01.*)
   ;;
 ubuntu,4.02.*)
-  echo "RUN opam switch 4.02.0dev+trunk" >> Dockerfile
+  echo "RUN opam switch 4.02.0+trunk" >> Dockerfile
   ;;
 *)
   echo Unknown $distro $version combo
@@ -18,4 +18,4 @@ ubuntu,4.02.*)
   ;;
 esac
 
-sudo docker.io build --no-cache=true -t opam:$distro-$version .
+sudo docker.io build -t opam:$distro-$version .
