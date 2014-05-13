@@ -13,5 +13,9 @@ USER opam
 ENV HOME /home/opam
 ENV OPAMVERBOSE 1
 ENV OPAMYES 1
-RUN opam init
+WORKDIR /home/opam
+RUN git clone git://github.com/ocaml/opam-repository
+RUN opam init /home/opam/opam-repository
 RUN opam install ocamlfind
+WORKDIR /home/opam/opam-repository
+RUN opam-admin make
