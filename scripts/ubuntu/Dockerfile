@@ -1,6 +1,6 @@
 FROM ubuntu:trusty
 MAINTAINER Anil Madhavapeddy <anil@recoil.org>
-RUN apt-get -y install sudo pkg-config git build-essential m4 software-properties-common ocaml camlp4-extra ocaml-native-compilers opam unzip
+RUN apt-get -y install sudo pkg-config git build-essential m4 software-properties-common ocaml camlp4-extra ocaml-native-compilers opam unzip curl
 RUN git config --global user.email "docker@example.com"
 RUN git config --global user.name "Docker CI"
 ADD opam-installext /usr/bin/opam-installext
