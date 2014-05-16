@@ -7,9 +7,9 @@ cp scripts/$distro/opam-installext .
 cp scripts/$distro/Dockerfile .
 
 case $distro,$version in 
-ubuntu,4.01.*)
+ubuntu-trusty,4.01.*)
   ;;
-ubuntu,4.02.*)
+ubuntu-trusty,4.02.*)
   echo "RUN opam switch 4.02.0+trunk" >> Dockerfile
   ;;
 *)
