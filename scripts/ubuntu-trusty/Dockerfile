@@ -14,8 +14,9 @@ ENV HOME /home/opam
 ENV OPAMVERBOSE 1
 ENV OPAMYES 1
 WORKDIR /home/opam
-RUN git clone git://github.com/ocaml/opam-repository
-RUN opam init /home/opam/opam-repository
-RUN opam install ocamlfind
+USER opam
+RUN sudo -u opam git clone git://github.com/ocaml/opam-repository
+RUN sudo -u opam opam init -a -y /home/opam/opam-repository
+RUN sudo -u opam opam install ocamlfind
 WORKDIR /home/opam/opam-repository
-RUN opam-admin make
+RUN sudo -u opam opam-admin make
