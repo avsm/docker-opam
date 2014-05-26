@@ -9,7 +9,9 @@ fi
 srcext=`opam install $* -e source,linux`
 echo Ubuntu srcexts: $srcext
 if [ "$srcext" != "" ]; then
-  curl -sL ${srcext} | bash
+  t=`mktemp`
+  curl -sL ${srcext} > $t
+  bash -ex $t
 fi
 
 opam install $*
