@@ -10,7 +10,7 @@ case $distro,$version in
 ubuntu-trusty,4.01.*)
   ;;
 ubuntu-trusty,4.02.*)
-  echo "RUN opam switch 4.02.0+trunk" >> Dockerfile
+  echo "RUN sudo -u opam opam switch 4.02.0+trunk" >> Dockerfile
   ;;
 *)
   echo Unknown $distro $version combo
