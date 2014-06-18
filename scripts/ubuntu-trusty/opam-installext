@@ -6,10 +6,12 @@ if [ "$depext" != "" ]; then
   sudo apt-get install -qq -y build-essential m4 
   sudo apt-get install -qq -y $depext
 fi
-srcext=`opam install $pkg -e source,linux`
+srcext=`opam install $* -e source,linux`
 echo Ubuntu srcexts: $srcext
 if [ "$srcext" != "" ]; then
-  curl -sL ${srcext} | bash
+  t=`mktemp`
+  curl -sL ${srcext} > $t
+  bash -ex $t
 fi
 
 opam install $*

@@ -1,6 +1,7 @@
 FROM ubuntu:trusty
 MAINTAINER Anil Madhavapeddy <anil@recoil.org>
-RUN apt-get -y install sudo pkg-config git build-essential m4 software-properties-common ocaml camlp4-extra ocaml-native-compilers opam
+RUN apt-get -y update
+RUN apt-get -y install sudo pkg-config git build-essential m4 software-properties-common ocaml camlp4-extra ocaml-native-compilers opam unzip curl
 RUN git config --global user.email "docker@example.com"
 RUN git config --global user.name "Docker CI"
 ADD opam-installext /usr/bin/opam-installext
@@ -13,7 +14,10 @@ USER opam
 ENV HOME /home/opam
 ENV OPAMVERBOSE 1
 ENV OPAMYES 1
-ENV OPAMDATE 20140511
-RUN opam init
-RUN opam switch 4.02.0dev+trunk
-RUN opam install ocamlfind
+WORKDIR /home/opam
+USER opam
+RUN sudo -u opam git clone git://github.com/ocaml/opam-repository
+RUN sudo -u opam opam init -a -y /home/opam/opam-repository
+RUN sudo -u opam opam install ocamlfind
+WORKDIR /home/opam/opam-repository
+RUN sudo -u opam opam-admin make
