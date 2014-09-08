@@ -4,13 +4,13 @@ distro=$1
 version=$2
 
 cp scripts/$distro/opam-installext .
-cp scripts/$distro/Dockerfile .
 
 case $distro,$version in 
 ubuntu-trusty,4.01.*)
+  sed -e "s/@COMPILER_VERSION@/$version/g" < scripts/$distro/Dockerfile > Dockerfile
   ;;
 ubuntu-trusty,4.02.*)
-  echo "RUN sudo -u opam opam switch 4.02.0+trunk" >> Dockerfile
+  sed -e "s/@COMPILER_VERSION@/4.02.0+trunk/g" < scripts/$distro/Dockerfile > Dockerfile
   ;;
 *)
   echo Unknown $distro $version combo
