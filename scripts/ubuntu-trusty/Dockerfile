@@ -2,7 +2,7 @@ FROM ubuntu:trusty
 MAINTAINER Anil Madhavapeddy <anil@recoil.org>
 ADD opam-installext /usr/bin/opam-installext
 RUN apt-get -y update
-RUN apt-get -y install sudo pkg-config git build-essential m4 software-properties-common aspcud unzip curl
+RUN apt-get -y install sudo pkg-config git build-essential m4 software-properties-common aspcud unzip curl libx11-dev
 ADD scripts/ubuntu-trusty/opam.list /etc/apt/sources.list.d/opam.list
 RUN curl -OL http://download.opensuse.org/repositories/home:ocaml/xUbuntu_14.04/Release.key
 RUN apt-key add - < Release.key
