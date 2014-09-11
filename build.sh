@@ -5,20 +5,14 @@ version=$2
 
 cp scripts/$distro/opam-installext .
 
-case $distro,$version in 
-ubuntu-trusty,4.01.*)
-  sed -e "s/@COMPILER_VERSION@/$version/g" < scripts/$distro/Dockerfile > Dockerfile
-  ;;
-ubuntu-trusty,4.02.*)
-  sed -e "s/@COMPILER_VERSION@/$version/g" < scripts/$distro/Dockerfile > Dockerfile
-  ;;
-ubuntu-trusty,4.03.*)
+case $version in
+4.03.*)
   sed -e "s/@COMPILER_VERSION@/$version+trunk/g" < scripts/$distro/Dockerfile > Dockerfile
   ;;
 *)
-  echo Unknown $distro $version combo
-  exit 1
+  sed -e "s/@COMPILER_VERSION@/$version/g" < scripts/$distro/Dockerfile > Dockerfile
   ;;
 esac
 
-sudo docker.io build --no-cache=true -t opam:$distro-$version .
+CACHE="--nocache=true"
+sudo docker.io build ${CACHE} -t opam:$distro-$version .
