@@ -14,5 +14,5 @@ case $version in
   ;;
 esac
 
-CACHE="--nocache=true"
+CACHE="--no-cache=true"
 sudo docker.io build ${CACHE} -t opam:$distro-$version .
