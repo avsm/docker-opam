@@ -3,6 +3,6 @@
 distro=$1
 version=$2
 
-./setup.sh $1 $2
+cd build/$distro-$version
 CACHE="--no-cache=true"
 sudo docker.io build ${CACHE} -t opam:$distro-$version .

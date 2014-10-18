@@ -1,14 +1,13 @@
 FROM ubuntu:trusty
 MAINTAINER Anil Madhavapeddy <anil@recoil.org>
-ADD scripts/ubuntu-trusty/opam-installext /usr/bin/opam-installext
+ADD opam-installext /usr/bin/opam-installext
 RUN apt-get -y update
 RUN apt-get -y install sudo pkg-config git build-essential m4 software-properties-common aspcud unzip curl libx11-dev
-ADD scripts/ubuntu-trusty/opam.list /etc/apt/sources.list.d/opam.list
+ADD opam.list /etc/apt/sources.list.d/opam.list
 RUN curl -OL http://download.opensuse.org/repositories/home:ocaml/xUbuntu_14.04/Release.key
 RUN apt-key add - < Release.key
 RUN apt-get -y update
-#RUN apt-get -y install opam
-RUN git clone git://github.com/ocaml/opam
+RUN git clone -b 1.2 git://github.com/ocaml/opam
 RUN sh -c "cd opam && make cold && make install"
 RUN git config --global user.email "docker@example.com"
 RUN git config --global user.name "Docker CI"
