@@ -13,6 +13,7 @@ RUN git config --global user.name "Docker CI"
 RUN yum groupinstall -y "Development Tools"
 RUN curl -o /etc/yum.repos.d/home:ocaml.repo -OL http://download.opensuse.org/repositories/home:ocaml/CentOS_7/home:ocaml.repo
 RUN yum install -y opam m4 
+RUN chown -R opam:opam /home/opam
 USER opam
 ENV HOME /home/opam
 ENV OPAMYES 1
