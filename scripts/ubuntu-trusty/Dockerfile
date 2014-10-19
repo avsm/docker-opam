@@ -18,12 +18,11 @@ RUN chmod 440 /etc/sudoers.d/opam
 RUN chown root:root /etc/sudoers.d/opam
 USER opam
 ENV HOME /home/opam
-ENV OPAMVERBOSE 1
 ENV OPAMYES 1
 WORKDIR /home/opam
 USER opam
 RUN sudo -u opam git clone git://github.com/ocaml/opam-repository
 RUN sudo -u opam opam init --comp=@COMPILER_VERSION@ -a -y /home/opam/opam-repository
-RUN sudo -u opam opam install ocamlfind
+RUN sudo -u opam opam install ocamlfind camlp4
 WORKDIR /home/opam/opam-repository
 ONBUILD RUN sudo -u opam sh -c "cd opam-repository && git pull && opam update -u -y"
