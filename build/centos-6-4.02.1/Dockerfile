@@ -23,4 +23,4 @@ RUN sudo -u opam git clone git://github.com/ocaml/opam-repository
 RUN sudo -u opam opam init --comp=4.02.1 -a -y /home/opam/opam-repository
 RUN sudo -u opam opam install ocamlfind camlp4
 WORKDIR /home/opam/opam-repository
-ONBUILD RUN sudo -u opam sh -c "cd opam-repository && git pull && opam update -u -y"
+ONBUILD RUN sudo -u opam sh -c "cd /home/opam/opam-repository && git pull && opam update -u -y"
