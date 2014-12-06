@@ -9,5 +9,5 @@ done
 
 # Build the archive daemon over Ubuntu Trusty
 rm -rf build/ubuntu-trusty-archive
-cp -r build/ubuntu-trusty-4.02.1 build/ubuntu-trusty-archive
-cat scripts/ubuntu-trusty/Dockerfile.archive >> build/ubuntu-trusty-archive/Dockerfile
+mkdir -p build/ubuntu-trusty-archive
+cp scripts/ubuntu-trusty/Dockerfile.archive build/ubuntu-trusty-archive/Dockerfile
