@@ -13,6 +13,7 @@ RUN git config --global user.name "Docker CI"
 RUN yum groupinstall -y "Development Tools"
 RUN curl -o /etc/yum.repos.d/home:ocaml.repo -OL http://download.opensuse.org/repositories/home:ocaml/CentOS_7/home:ocaml.repo
 RUN yum install -y opam
+RUN yum install -y ocaml ocaml-camlp4-devel ocaml-ocamldoc
 RUN chown -R opam:opam /home/opam
 USER opam
 ENV HOME /home/opam
@@ -20,7 +21,8 @@ ENV OPAMYES 1
 WORKDIR /home/opam
 USER opam
 RUN sudo -u opam git clone git://github.com/ocaml/opam-repository
-RUN sudo -u opam opam init --comp=@COMPILER_VERSION@ -a -y /home/opam/opam-repository
+RUN sudo -u opam opam init -a -y /home/opam/opam-repository
+RUN sudo -u opam opam switch @COMPILER_VERSION@
 RUN sudo -u opam opam installext ocamlfind camlp4
 WORKDIR /home/opam/opam-repository
 ONBUILD RUN sudo -u opam sh -c "cd /home/opam/opam-repository && git pull && opam update -u -y"
