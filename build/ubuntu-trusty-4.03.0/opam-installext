@@ -3,6 +3,7 @@
 depext=`opam install $* -e ubuntu`
 echo Ubuntu depexts: $depext
 if [ "$depext" != "" ]; then 
+  sudo apt-get update -y
   sudo apt-get install -qq -y build-essential m4 
   sudo apt-get install -qq -y $depext
 fi
