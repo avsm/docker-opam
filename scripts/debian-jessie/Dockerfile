@@ -1,23 +1,29 @@
 FROM debian:jessie
 MAINTAINER Marek Kubica <marek@xivilization.net>
 ADD opam-installext /usr/bin/opam-installext
-RUN apt-get -y update
-RUN apt-get -y install sudo pkg-config git build-essential m4 software-properties-common aspcud unzip curl libx11-dev opam
-RUN git config --global user.email "docker@example.com"
-RUN git config --global user.name "Docker CI"
-RUN adduser --disabled-password --gecos "" opam
-RUN passwd -l opam
+RUN apt-get -y update && \
+  apt-get -y install \
+    aspcud \
+    build-essential \
+    git \
+    libx11-dev \
+    m4 \
+    opam \
+    pkg-config \
+    sudo \
+    unzip && \
+  apt-get -y clean && \
+  adduser --disabled-password --gecos "" opam && \
+  passwd -l opam && \
+  chown -R opam:opam /home/opam
 ADD opamsudo /etc/sudoers.d/opam
-RUN chmod 440 /etc/sudoers.d/opam
-RUN chown root:root /etc/sudoers.d/opam
-RUN chown -R opam:opam /home/opam
+RUN chmod 440 /etc/sudoers.d/opam && \
+  chown root:root /etc/sudoers.d/opam
 USER opam
-ENV HOME /home/opam
-ENV OPAMYES 1
+ENV HOME=/home/opam OPAMYES=1
 WORKDIR /home/opam
-USER opam
-RUN sudo -u opam sh -c "git clone git://github.com/ocaml/opam-repository"
-RUN sudo -u opam sh -c "opam init --comp=@COMPILER_VERSION@ -a -y /home/opam/opam-repository"
-RUN sudo -u opam sh -c "opam install ocamlfind camlp4"
+RUN git clone https://github.com/ocaml/opam-repository && \
+  opam init --comp=@COMPILER_VERSION@ -a -y /home/opam/opam-repository && \
+  opam install ocamlfind camlp4
 WORKDIR /home/opam/opam-repository
 ONBUILD RUN sudo -u opam sh -c "cd /home/opam/opam-repository && git pull && opam update -u -y"
