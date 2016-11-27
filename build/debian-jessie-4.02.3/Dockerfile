@@ -23,7 +23,7 @@ USER opam
 ENV HOME=/home/opam OPAMYES=1
 WORKDIR /home/opam
 RUN git clone https://github.com/ocaml/opam-repository && \
-  opam init --comp=4.02.1 -a -y /home/opam/opam-repository && \
+  opam init --comp=4.02.3 -a -y /home/opam/opam-repository && \
   opam install ocamlfind camlp4
 WORKDIR /home/opam/opam-repository
 ONBUILD RUN sudo -u opam sh -c "cd /home/opam/opam-repository && git pull && opam update -u -y"

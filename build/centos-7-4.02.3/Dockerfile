@@ -22,7 +22,7 @@ WORKDIR /home/opam
 USER opam
 RUN sudo -u opam git clone git://github.com/ocaml/opam-repository
 RUN sudo -u opam opam init -a -y /home/opam/opam-repository
-RUN sudo -u opam opam switch 4.02.1
+RUN sudo -u opam opam switch 4.02.3
 RUN sudo -u opam opam installext ocamlfind camlp4
 WORKDIR /home/opam/opam-repository
 ONBUILD RUN sudo -u opam sh -c "cd /home/opam/opam-repository && git pull && opam update -u -y"
