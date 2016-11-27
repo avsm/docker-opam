@@ -13,7 +13,7 @@ odir="build/$distro-$version"
 rm -rf "$odir"
 mkdir -p "$odir"
 
-cp scripts/$distro/* $odir/
+cp scripts/$distro/* "$odir/"
 
 case $version in
 4.05.*)
@@ -24,6 +24,7 @@ case $version in
   odir_flambda="$odir-flambda"
   rm -rf "$odir_flambda"
   mkdir -p "$odir_flambda"
+  cp scripts/$distro/* "$odir_flambda/"
   sed -e "s/@COMPILER_VERSION@/$version+flambda/g" < "scripts/$distro/Dockerfile" > "$odir_flambda/Dockerfile"
   ;;
 *)
