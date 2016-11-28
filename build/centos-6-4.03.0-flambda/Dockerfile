@@ -16,6 +16,6 @@ RUN chmod 440 /etc/sudoers.d/opam && \
 USER opam
 ENV HOME=/home/opam OPAMYES=1
 WORKDIR /home/opam
-RUN opam init --comp=4.01.0 -a -y && \
+RUN opam init --comp=4.03.0+flambda -a -y && \
   opam installext ocamlfind camlp4
 ONBUILD RUN opam update -u -y

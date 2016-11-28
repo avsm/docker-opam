@@ -1,10 +1,12 @@
-FROM centos:centos6
+FROM centos:centos7
 MAINTAINER Marek Kubica <marek@xivilization.net>
-RUN curl -o /etc/yum.repos.d/home:ocaml.repo -OL http://download.opensuse.org/repositories/home:ocaml/CentOS_6/home:ocaml.repo && \
+RUN curl -o /etc/yum.repos.d/home:ocaml.repo -OL http://download.opensuse.org/repositories/home:ocaml/CentOS_7/home:ocaml.repo && \
   yum groupinstall -y "Development Tools" && \
   yum install -y \
+    aspcud \
     opam \
-    sudo && \
+    sudo \
+    which && \
   useradd -d /home/opam -m -s /bin/bash opam && \
   passwd -l opam && \
   chown -R opam:opam /home/opam
@@ -16,6 +18,6 @@ RUN chmod 440 /etc/sudoers.d/opam && \
 USER opam
 ENV HOME=/home/opam OPAMYES=1
 WORKDIR /home/opam
-RUN opam init --comp=4.01.0 -a -y && \
+RUN opam init --comp=4.04.0 -a -y && \
   opam installext ocamlfind camlp4
 ONBUILD RUN opam update -u -y
