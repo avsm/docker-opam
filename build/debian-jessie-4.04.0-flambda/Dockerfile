@@ -22,8 +22,6 @@ ADD opamsudo /etc/sudoers.d/opam
 RUN chmod 440 /etc/sudoers.d/opam && \
   chown root:root /etc/sudoers.d/opam
 USER opam
-RUN git clone https://github.com/ocaml/opam-repository /home/opam/opam-repository && \
-  opam init --comp=4.04.0+flambda -a -y /home/opam/opam-repository && \
+RUN opam init --comp=4.04.0+flambda -a -y && \
   opam install ocamlfind camlp4
-ONBUILD RUN git -C /home/opam/opam-repository pull && \
-  opam update -u -y
+ONBUILD RUN opam update -u -y
